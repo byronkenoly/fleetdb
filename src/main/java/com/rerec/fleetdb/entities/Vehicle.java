@@ -2,14 +2,19 @@ package com.rerec.fleetdb.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Vehicle {
     @Id
     private String numberPlate;
-    private String make;
     private String region;
     private int engineCapacity;
+
+    @ManyToOne
+    @JoinColumn(name="make_id")
+    private Make make;
 
     public String getNumberPlate(){
         return numberPlate;
@@ -19,11 +24,11 @@ public class Vehicle {
         this.numberPlate = numberPlate;
     }
 
-    public String getMake() {
+    public Make getMake() {
         return make;
     }
 
-    public void setMake(String make) {
+    public void setMake(Make make) {
         this.make = make;
     }
 
