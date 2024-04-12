@@ -1,5 +1,6 @@
 package com.rerec.fleetdb.controller;
 
+import com.rerec.fleetdb.entities.Make;
 import com.rerec.fleetdb.entities.Vehicle;
 import com.rerec.fleetdb.service.VehicleService;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,10 @@ public class VehicleController {
     @GetMapping("/newVehicle")
     public String addNewVehicle(Model model){
         Vehicle vehicle = new Vehicle();
+
         model.addAttribute("vehicle", vehicle);
+        model.addAttribute("listOfMake", vehicleService.getAllMake());
+
         return "newVehicle";
     }
 
@@ -53,11 +57,11 @@ public class VehicleController {
         return "redirect:/vehicles";
     }
 
-    @GetMapping("/page/{pageNo}")
+    @GetMapping("/vehiclePage/{pageNo}")
     public String findPaginated(@PathVariable (value = "pageNo") int pageNo, Model model){
         //Iterable<Vehicle> sorted = vehicleService.sortRecords(sortField, sortDir);
         //List<Vehicle> listOfVehicles = sorted.getContent()
-        int pageSize = 5;
+        int pageSize = 10;
 
         Page<Vehicle> page = vehicleService.paginateRecords(pageNo, pageSize);
         List<Vehicle> listOfVehicles = page.getContent();
