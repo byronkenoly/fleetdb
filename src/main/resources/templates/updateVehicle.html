@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Vehicles</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Vehicle</h2>
+        <form action="#" th:action="@{/saveVehicle}" th:object="${vehicle}" method="POST">
+            <input type="hidden" th:field="*{numberPlate}"/>
+
+            <!--<input type="text" th:field="*{numberPlate}" class="form-control mb-4 col-4"/>-->
+            <input type="text" th:field="*{make}" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{region}" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{engineCapacity}" class="form-control mb-4 col-4"/>
+
+            <button type="submit" class="btn btn-info col-2">Update Vehicle</button>
+        </form>
+    </div>
+</body>
+</html>
