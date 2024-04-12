@@ -2,41 +2,47 @@ package com.rerec.fleetdb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 public class Invoice {
     @Id
     @GeneratedValue
     private Long no;
-    private String numberPlate;
-    private long invoiceNo;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_no_plate")
+    private Vehicle vehicle;
+    private Long invoiceNo;
     @Temporal(TemporalType.DATE)
     private Calendar date;
     private String serviceDescription;
     private Float total;
+    //@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    //private List<InvoicedWork> invoicedWorks = new ArrayList<>();
 
-    public long getNo() {
+    public Long getNo() {
         return no;
     }
 
-    public void setNo(long no) {
+    public void setNo(Long no) {
         this.no = no;
     }
 
-    public String getNumberPlate() {
-        return numberPlate;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public long getInvoiceNo() {
         return invoiceNo;
     }
 
-    public void setInvoiceNo(long invoiceNo) {
+    public void setInvoiceNo(Long invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
 
@@ -63,5 +69,14 @@ public class Invoice {
     public void setTotal(Float total) {
         this.total = total;
     }
+
+    /*
+    public List<InvoicedWork> getInvoicedWorks() {
+        return invoicedWorks;
+    }
+
+    public void setInvoicedWorks(List<InvoicedWork> invoicedWorks) {
+        this.invoicedWorks = invoicedWorks;
+    }*/
 }
 
