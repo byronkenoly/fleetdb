@@ -11,10 +11,14 @@ public class WorkInstruction {
     private String numberPlate;
     @Temporal(TemporalType.DATE)
     private Calendar date;
-    private String contractor;
-    private String instruction;
-    private String requestedBy;
-    private String designation;
+
+    @ManyToOne
+    @JoinColumn(name="contractor_id")
+    private Contractor contractor;
+
+    @ManyToOne
+    @JoinColumn(name="staff_id")
+    private Staff staff;
 
     public long getNo() {
         return no;
@@ -40,35 +44,19 @@ public class WorkInstruction {
         this.date = date;
     }
 
-    public String getContractor() {
+    public Contractor getContractor() {
         return contractor;
     }
 
-    public void setContractor(String contractor) {
+    public void setContractor(Contractor contractor) {
         this.contractor = contractor;
     }
 
-    public String getInstruction() {
-        return instruction;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
-
-    public String getRequestedBy() {
-        return requestedBy;
-    }
-
-    public void setRequestedBy(String requestedBy) {
-        this.requestedBy = requestedBy;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }
