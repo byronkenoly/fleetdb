@@ -1,19 +1,28 @@
 package com.rerec.fleetdb.entities;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Quotation {
     @Id
     @GeneratedValue
     private Long no;
-    private String numberPlate;
-    private long documentNo;
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_no_plate")
+    private Vehicle vehicle;
+
+    private String documentNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+
     private String serviceDescription;
+
     private Float total;
 
     public long getNo() {
@@ -24,27 +33,27 @@ public class Quotation {
         this.no = no;
     }
 
-    public String getNumberPlate() {
-        return numberPlate;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
-    public long getDocumentNo() {
+    public String getDocumentNo() {
         return documentNo;
     }
 
-    public void setDocumentNo(long documentNo) {
+    public void setDocumentNo(String documentNo) {
         this.documentNo = documentNo;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
