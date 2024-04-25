@@ -3,6 +3,9 @@ package com.rerec.fleetdb.service;
 import com.rerec.fleetdb.entities.Make;
 import com.rerec.fleetdb.entities.Vehicle;
 import com.rerec.fleetdb.repository.MakeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +44,11 @@ public class MakeService {
 
     public void deleteMake(Long id){
         this.makeRepository.deleteById(id);
+    }
+
+    public Page<Make> findPaginated(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+        return this.makeRepository.findAll(pageable);
     }
 }
