@@ -3,16 +3,16 @@ package com.rerec.fleetdb.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class InvoicedWork {
+public class InvoiceItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="checklist_id")
     private Checklist checklist;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="invoice_id")
     private Invoice invoice;
 
