@@ -1,6 +1,8 @@
 package com.rerec.fleetdb.service;
 
+import com.rerec.fleetdb.entities.Make;
 import com.rerec.fleetdb.entities.Vehicle;
+import com.rerec.fleetdb.repository.MakeRepository;
 import com.rerec.fleetdb.repository.VehicleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,13 +17,19 @@ import java.util.Optional;
 public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
+    private final MakeRepository makeRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository){
+    public VehicleService(VehicleRepository vehicleRepository, MakeRepository makeRepository){
         this.vehicleRepository = vehicleRepository;
+        this.makeRepository = makeRepository;
     }
 
     public List<Vehicle> getAllVehicle(){
         return vehicleRepository.findAll();
+    }
+
+    public List<Make> getAllMake(){
+        return makeRepository.findAll();
     }
 
     public void saveVehicle(Vehicle vehicle){
