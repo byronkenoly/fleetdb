@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | New Make</title>
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/newItem.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2>Add New Checklist Item</h2>
+    <p>Inserts new checklist item into the database</p>
+    <form action="#" th:action="@{/saveChecklistItem}" th:object="${checklist}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Checklist Item</label>
+            <input type="text" th:field="*{item}" class="form__input" required/>
+        </div>
+
+        <button type="submit" class="form__btn">Save</button>
+    </form>
+</div>
+</body>
+</html>
