@@ -4,15 +4,15 @@ class VerticalNavbar extends HTMLElement {
             <nav class="navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a href = "/vehicles" class="nav-link">
                             <span class="material-symbols-outlined">airport_shuttle</span>
                             <span class="link-text">Vehicles</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">
-                            <span class="material-symbols-outlined">payments</span>
-                            <span class="link-text">Invoices</span>
+                            <span class="material-symbols-outlined">description</span>
+                            <span class="link-text">Work Instructions</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -22,17 +22,19 @@ class VerticalNavbar extends HTMLElement {
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href = "/invoices" class="nav-link">
+                            <span class="material-symbols-outlined">payments</span>
+                            <span class="link-text">Invoices</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link">
                             <span class="material-symbols-outlined">speed</span>
                             <span class="link-text">Mileage</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <span class="material-symbols-outlined">description</span>
-                            <span class="link-text">Work Instructions</span>
-                        </a>
-                    </li>
+
                 </ul>
             </nav>
         `
