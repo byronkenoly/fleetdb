@@ -144,7 +144,7 @@ thead th {
 }
 
 th, td {
-    padding: 10px 20px;
+    padding: 5px 20px;
     word-break: break-all;
     text-align: center;
 }
@@ -166,5 +166,56 @@ td .edit{
 
 td .delete{
     color: #f80000;
+}
+
+.pagination-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.pagination-container div {
+    margin: 10px 20px;
+}
+
+.page-item {
+    display: inline-block;
+    margin: 0 10px;
+    background: #ccc;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.page-item span, .page-item a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.next-last {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 300;
+    visibility: hidden;
+}
+
+.next-last a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.total-items {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
 }
 /*td:last-child {text-align:center;}*/
