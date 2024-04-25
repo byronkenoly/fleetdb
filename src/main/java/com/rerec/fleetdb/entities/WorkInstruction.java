@@ -1,16 +1,23 @@
 package com.rerec.fleetdb.entities;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
+import java.util.Date;
+
 @Entity
 public class WorkInstruction {
     @Id
     @GeneratedValue
     private Long no;
-    private String numberPlate;
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_no_plate")
+    private Vehicle vehicle;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name="contractor_id")
@@ -28,19 +35,19 @@ public class WorkInstruction {
         this.no = no;
     }
 
-    public String getNumberPlate() {
-        return numberPlate;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
