@@ -1,23 +1,28 @@
 package com.rerec.fleetdb.entities;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Invoice {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
+
     @ManyToOne
     @JoinColumn(name = "vehicle_no_plate")
     private Vehicle vehicle;
-    private Long invoiceNo;
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
-    private String serviceDescription;
+
+    private String invoiceNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+
+    @OneToMany(mappedBy = "invoice")
+    private List<InvoiceItems> invoiceItems = new ArrayList<>();
+
     private Float total;
     //@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
     //private List<InvoicedWork> invoicedWorks = new ArrayList<>();
@@ -38,28 +43,28 @@ public class Invoice {
         this.vehicle = vehicle;
     }
 
-    public long getInvoiceNo() {
+    public String getInvoiceNo() {
         return invoiceNo;
     }
 
-    public void setInvoiceNo(Long invoiceNo) {
+    public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getServiceDescription() {
-        return serviceDescription;
+    public List<InvoiceItems> getInvoiceItems(){
+        return invoiceItems;
     }
 
-    public void setServiceDescription(String serviceDescription) {
-        this.serviceDescription = serviceDescription;
+    public void setInvoiceItems(List<InvoiceItems> invoiceItems){
+        this.invoiceItems = invoiceItems;
     }
 
     public Float getTotal() {
