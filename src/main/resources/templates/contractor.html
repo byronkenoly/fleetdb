@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Contractor</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<vertical-navbar></vertical-navbar>
+
+<main>
+    <div class="table">
+        <div class="table_header">
+            <p>Contractor Table</p>
+            <div>
+                <input placeholder="Search Contractor">
+                <a th:href = "@{/newContractor}" class="add_new">Add Contractor</a>
+            </div>
+        </div>
+
+        <div class="table_section">
+            <table class="table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Contractor</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contractor : ${listOfContractor}">
+                    <td th:text="${contractor.id}"></td>
+                    <td th:text="${contractor.name}"></td>
+                    <td>
+                        <a th:href="@{/updateContractor/{id}(id=${contractor.id})}" class="edit">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <a th:href="@{/deleteContractor/{id}(id=${contractor.id})}" class="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+    addHeadContent();
+    mainCss();
+</script>
+<script th:src="@{/js/template.js}"></script>
+</body>
+</html>

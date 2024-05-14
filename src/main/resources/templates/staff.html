@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Staff</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<vertical-navbar></vertical-navbar>
+
+<main>
+    <div class="table">
+        <div class="table_header">
+            <p>Staff Table</p>
+            <div>
+                <input placeholder="Search Staff">
+                <a th:href = "@{/newStaff}" class="add_new">Add Staff</a>
+            </div>
+        </div>
+
+        <div class="table_section">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Name</th>
+                    <th>Job Title</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="staff : ${listOfStaff}">
+                    <td th:text="${staff.staffId}"></td>
+                    <td th:text="${staff.name}"></td>
+                    <td th:text="${staff.designation.title}"></td>
+                    <td>
+                        <a th:href="@{/updateStaff/{id}(id=${staff.staffId})}" class="edit">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <a th:href="@{/deleteStaff/{id}(id=${staff.staffId})}" class="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</main>
+
+<script>
+    addHeadContent();
+    mainCss();
+</script>
+<script th:src="@{/js/template.js}"></script>
+</body>
+</html>

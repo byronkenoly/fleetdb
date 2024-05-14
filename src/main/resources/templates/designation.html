@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Designation</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<vertical-navbar></vertical-navbar>
+
+<main>
+    <div class="table">
+        <div class="table_header">
+            <p>Designation Table</p>
+            <div>
+                <input placeholder="Search Make">
+                <a th:href = "@{/newDesignation}" class="add_new">Add Designation</a>
+            </div>
+        </div>
+
+        <div class="table_section">
+            <table class="table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Designation ID</th>
+                    <th>Designation</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="designation : ${listOfDesignation}">
+                    <td th:text="${designation.id}"></td>
+                    <td th:text="${designation.title}"></td>
+                    <td>
+                        <a th:href="@{/updateDesignation/{id}(id=${designation.id})}" class="edit">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <a th:href="@{/deleteDesignation/{id}(id=${designation.id})}" class="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+    addHeadContent();
+    mainCss();
+</script>
+<script th:src="@{/js/template.js}"></script>
+</body>
+</html>

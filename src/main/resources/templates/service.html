@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Service</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<vertical-navbar></vertical-navbar>
+
+<main>
+    <div class="table">
+        <div class="table_header">
+            <p>Service Table</p>
+            <div>
+                <input placeholder="Search Service">
+                <a th:href = "@{/newService}" class="add_new">Add Service</a>
+            </div>
+        </div>
+
+        <div class="table_section">
+            <table class="table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Service ID</th>
+                    <th>Service Type</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="service : ${listOfService}">
+                    <td th:text="${service.id}"></td>
+                    <td th:text="${service.type}"></td>
+                    <td>
+                        <a th:href="@{/updateService/{id}(id=${service.id})}" class="edit">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <a th:href="@{/deleteService/{id}(id=${service.id})}" class="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:if = "${totalPages > 1}">
+                <div class="pagination-container">
+                    <div class="next-last">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/servicePage/' + ${totalPages}}">Previous</a>
+                        <span th:unless="${currentPage < totalPages}">Previous</span>
+                    </div>
+
+                    <div>
+                            <span th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
+                                <a th:if="${currentPage != i}" th:href="@{'/servicePage/' + ${i}}">[[${i}]]</a>
+                                <span th:unless="${currentPage != i}">[[${i}]]</span>
+                            </span>
+                    </div>
+
+                    <div class="next-last">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/servicePage/' + ${currentPage + 1}}">Next</a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+                </div>
+                <div class="total-items">
+                    Total Rows: [[${totalItems}]]
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+    addHeadContent();
+    mainCss();
+</script>
+<script th:src="@{/js/template.js}"></script>
+</body>
+</html>

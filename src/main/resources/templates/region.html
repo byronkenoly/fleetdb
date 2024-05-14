@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Region</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<vertical-navbar></vertical-navbar>
+
+<main>
+    <div class="table">
+        <div class="table_header">
+            <p>Region Table</p>
+            <div>
+                <input placeholder="Search Region">
+                <a th:href = "@{/newRegion}" class="add_new">Add Region</a>
+            </div>
+        </div>
+
+        <div class="table_section">
+            <table class="table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Region ID</th>
+                    <th>Region</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="region : ${listOfRegion}">
+                    <td th:text="${region.id}"></td>
+                    <td th:text="${region.name}"></td>
+                    <td>
+                        <a th:href="@{/updateRegion/{id}(id=${region.id})}" class="edit">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <a th:href="@{/deleteRegion/{id}(id=${region.id})}" class="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>addHeadContent();</script>
+<script th:src="@{/js/template.js}"></script>
+</body>
+</html>
