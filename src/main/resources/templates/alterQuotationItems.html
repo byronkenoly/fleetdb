@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Quo. Items</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add Description of Goods/Services</h2>
+    <form action="#" th:action="@{/saveQuotationItems}" th:object="${quotationItem}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Goods/Services</label>
+            <select th:field="*{checklist}" class="form__input" required>
+                <th:block th:each="checklist : ${listOfChecklist}">
+                    <option th:text="${checklist.item}" th:value="${checklist.id}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <select hidden th:field="*{quotation}">
+            <th:block th:each="quotationFromDB : ${quotationFromDB}">
+                <option th:value="${quotationFromDB.no}"></option>
+            </th:block>
+        </select>
+
+        <button type="submit" class="form__btn">Add</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>
