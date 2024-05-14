@@ -3,6 +3,7 @@ package com.rerec.fleetdb.controller;
 import com.rerec.fleetdb.entities.Checklist;
 import com.rerec.fleetdb.service.ChecklistService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,8 @@ public class ChecklistController {
 
     @GetMapping("/checklist")
     public String viewChecklist(Model model){
-        return findPaginated(1, model);
+        String keyword = null;
+        return findPaginated(model,1, "item", "asc", keyword);
     }
 
     @GetMapping("/newChecklistItem")
@@ -58,16 +60,21 @@ public class ChecklistController {
     }
 
     @GetMapping("/checklistPage/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model){
-        int pageSize = 20;
+    public String findPaginated(Model model, @PathVariable(value = "pageNo") int pageNo, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword){
 
-        Page<Checklist> page = checklistService.paginateRecords(pageNo, pageSize);
+        Page<Checklist> page = checklistService.getAllChecklist(pageNo, sortField, sortDir, keyword);
         List<Checklist> listOfChecklist = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listOfChecklist", listOfChecklist);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("keyword", keyword);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "checklist";
     }
