@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Make</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Update Make</h2>
+    <p>Updates vehicle make/model record in the database</p>
+    <form action="#" th:action="@{/saveMake}" th:object="${make}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form__item">
+            <label class="form__label">Make/Model</label>
+            <input type="text" th:field="*{name}" class="form__input"/>
+        </div>
+
+        <button type="submit" class="form__btn">Update Make</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Invoice</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Update Invoice</h2>
+    <p>Updates invoice record in the database</p>
+    <form action="#" th:action="@{/saveInvoice}" th:object="${invoice}" method="POST">
+        <input type="hidden" th:field="*{no}"/>
+
+        <div class="form__item">
+            <label class="form__label">Vehicle</label>
+            <select th:field="*{vehicle}" class="form__input" required>
+                <th:block th:each="vehicle : ${listOfVehicle}">
+                    <option th:text="${vehicle.numberPlate}" th:value="${vehicle.numberPlate}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Invoice No.</label>
+            <input type="text" th:field="*{invoiceNo}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Contractor</label>
+            <select th:field="*{contractor}" class="form__input" required>
+                <th:block th:each="contractor : ${listOfContractor}">
+                    <option th:text="${contractor.name}" th:value="${contractor.id}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Date</label>
+            <input type="date" th:field="*{date}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Total</label>
+            <input type="text" th:field="*{total}" class="form__input"/>
+        </div>
+
+        <button type="submit" class="form__btn">Update Invoice</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

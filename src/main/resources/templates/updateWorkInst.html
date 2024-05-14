@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Vehicles</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Update Vehicle</h2>
+    <p>Updates vehicle record in the database</p>
+    <form action="#" th:action="@{/saveVehicle}" th:object="${vehicle}" method="POST">
+        <input type="hidden" th:field="*{numberPlate}"/>
+
+        <div class="form__item">
+            <label class="form__label">Make/Model</label>
+            <select th:field="*{make}" class="form__input" required>
+                <th:block th:each="make : ${listOfMake}">
+                    <option th:text="${make.name}" th:value="${make.id}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Region</label>
+            <select th:field="*{region}" class="form__input">
+                <th:block th:each="region : ${listOfRegion}">
+                    <option th:text="${region.name}" th:value="${region.id}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Engine Capacity</label>
+            <input type="text" th:field="*{engineCapacity}" class="form__input"/>
+        </div>
+
+        <button type="submit" class="form__btn">Update Vehicle</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

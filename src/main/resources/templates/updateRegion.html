@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Region</title>
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/newItem.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2>Update Region</h2>
+    <p>Updates region record in the database</p>
+    <form action="#" th:action="@{/saveRegion}" th:object="${region}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form__item">
+            <label class="form__label">Region</label>
+            <input type="text" th:field="*{name}" class="form__input"/>
+        </div>
+
+        <button type="submit" class="form__btn">Update Region</button>
+    </form>
+</div>
+</body>
+</html>
