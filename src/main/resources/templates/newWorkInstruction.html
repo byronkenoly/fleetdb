@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | New Work Inst.</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add New Work Instruction</h2>
+    <p>Inserts new work instruction into the database.</p>
+    <form action="#" th:action="@{/saveWorkInstruction}" th:object="${workInstruction}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Vehicle Registration No.</label>
+            <select th:field="*{vehicle}" class="form__input" required>
+                <th:block th:each="vehicle : ${listOfVehicle}">
+                    <option th:text="${vehicle.numberPlate}" th:value="${vehicle.numberPlate}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Contractor</label>
+            <select th:field="*{contractor}" class="form__input" required>
+                <th:block th:each="contractor : ${listOfContractor}">
+                    <option th:text="${contractor.name}" th:value="${contractor.id}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Date</label>
+            <input type="date" th:field="*{date}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Requested By</label>
+            <select th:field="*{staff}" class="form__input" required>
+                <th:block th:each="staff : ${listOfStaff}">
+                    <option th:text="${staff.name}" th:value="${staff.staffId}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <button type="submit" class="form__btn">Save</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

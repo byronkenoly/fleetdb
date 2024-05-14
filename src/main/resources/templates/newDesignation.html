@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | New Designation</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add New Job Title</h2>
+    <p>Inserts new job title into the database</p>
+    <form action="#" th:action="@{/saveDesignation}" th:object="${designation}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Job Title</label>
+            <input type="text" th:field="*{title}" class="form__input" required/>
+        </div>
+
+        <button type="submit" class="form__btn">Save</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>
