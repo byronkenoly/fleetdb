@@ -20,6 +20,7 @@ public class QuotationController {
 
     @GetMapping("/quotations")
     public String viewQuotations(Model model){
+
         model.addAttribute("listOfQuotations", quotationService.getAllQuotation());
         return "quotations";
     }
@@ -27,7 +28,11 @@ public class QuotationController {
     @GetMapping("/newQuotation")
     public String addNewQuotation(Model model){
         Quotation quotation = new Quotation();
+
         model.addAttribute("quotation", quotation);
+        model.addAttribute("listOfVehicle", quotationService.getAllVehicle());
+        model.addAttribute("listOfContractor", quotationService.getAllContractor());
+
         return "newQuotation";
     }
 

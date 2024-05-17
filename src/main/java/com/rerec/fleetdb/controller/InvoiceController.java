@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class InvoiceController {
 
         model.addAttribute("invoice", invoice);
         model.addAttribute("listOfVehicle", invoiceService.getAllVehicle());
+        model.addAttribute("listOfContractor", invoiceService.getAllContractor());
 
         return "newInvoice";
     }
@@ -44,6 +46,24 @@ public class InvoiceController {
     @PostMapping("/saveInvoice")
     public String saveInvoice(@ModelAttribute("invoice") Invoice invoice){
         invoiceService.saveInvoice(invoice);
+        return "redirect:/invoices";
+    }
+
+    @GetMapping("/updateInvoice/{no}")
+    public String updateExistingInvoice(@PathVariable (value = "no") Long no, Model model){
+        Invoice invoice = invoiceService.getInvoiceByID(no);
+
+        //set invoice as a model attribute to pre-populate the form
+        model.addAttribute("invoice", invoice);
+        model.addAttribute("listOfVehicle", invoiceService.getAllVehicle());
+        model.addAttribute("listOfContractor", invoiceService.getAllContractor());
+
+        return "updateInvoice";
+    }
+
+    @GetMapping("/deleteInvoice/{no}")
+    public String deleteInvoice(@PathVariable (value = "no") Long no){
+        this.invoiceService.deleteInvoice(no);
         return "redirect:/invoices";
     }
 }

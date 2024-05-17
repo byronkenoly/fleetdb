@@ -31,6 +31,7 @@ public class VehicleController {
 
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("listOfMake", vehicleService.getAllMake());
+        model.addAttribute("listOfRegion", vehicleService.getAllRegion());
 
         return "newVehicle";
     }
@@ -47,6 +48,8 @@ public class VehicleController {
 
         // set vehicle as a model attribute to pre-populate the form
         model.addAttribute("vehicle", vehicle);
+        model.addAttribute("listOfMake", vehicleService.getAllMake());
+        model.addAttribute("listOfRegion", vehicleService.getAllRegion());
 
         return "updateVehicle";
     }
@@ -61,7 +64,7 @@ public class VehicleController {
     public String findPaginated(@PathVariable (value = "pageNo") int pageNo, Model model){
         //Iterable<Vehicle> sorted = vehicleService.sortRecords(sortField, sortDir);
         //List<Vehicle> listOfVehicles = sorted.getContent()
-        int pageSize = 10;
+        int pageSize = 30;
 
         Page<Vehicle> page = vehicleService.paginateRecords(pageNo, pageSize);
         List<Vehicle> listOfVehicles = page.getContent();

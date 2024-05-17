@@ -1,8 +1,6 @@
 package com.rerec.fleetdb.controller;
 
-import com.rerec.fleetdb.entities.Invoice;
 import com.rerec.fleetdb.entities.InvoiceItems;
-import com.rerec.fleetdb.entities.Vehicle;
 import com.rerec.fleetdb.service.InvoiceItemsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,15 +34,4 @@ public class InvoiceItemsController {
         invoiceItemsService.saveInvoiceItem(invoiceItems);
         return "redirect:/invoices";
     }
-
-    /*
-    @GetMapping("/Vehicle/{numberPlate}")
-    public String updateExistingVehicle(@PathVariable(value = "numberPlate") String numberPlate, Model model){
-        Vehicle vehicle = vehicleService.getVehicleByNumberPlate(numberPlate);
-
-        // set vehicle as a model attribute to pre-populate the form
-        model.addAttribute("vehicle", vehicle);
-
-        return "updateVehicle";
-    }*/
 }

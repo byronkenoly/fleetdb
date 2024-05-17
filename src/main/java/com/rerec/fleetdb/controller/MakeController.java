@@ -47,7 +47,7 @@ public class MakeController {
     public String updateExistingMake(@PathVariable(value = "id") Long id, Model model){
         Make make = makeService.getMakeByID(id);
 
-        // set vehicle as a model attribute to pre-populate the form
+        // set make as a model attribute to pre-populate the form
         model.addAttribute("make", make);
 
         return "updateMake";
