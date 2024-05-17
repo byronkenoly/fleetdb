@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>REREC Fleet | New Invoice</title>
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link th:href="@{/styles/newItem.css}" rel="stylesheet">
+    <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -27,19 +23,17 @@
             <input type="text" th:field="*{invoiceNo}" class="form__input" required/>
         </div>
         <div class="form__item">
-            <label class="form__label">Date</label>
-            <input type="date" th:field="*{date}" class="form__input" required/>
-        </div>
-        <!--
-        <div>
-            <label class="form__label">Description of Goods/Services</label>
-            <select th:field="*{checklist}" class="form__input" required>
-                <th:block th:each="checklist : ${listOfChecklist}">
-                    <option th:text="${checklist.item}" th:value="${checklist.id}"></option>
+            <label class="form__label">Contractor</label>
+            <select th:field="*{contractor}" class="form__input" required>
+                <th:block th:each="contractor : ${listOfContractor}">
+                    <option th:text="${contractor.name}" th:value="${contractor.id}"></option>
                 </th:block>
             </select>
         </div>
-        -->
+        <div class="form__item">
+            <label class="form__label">Date</label>
+            <input type="date" th:field="*{date}" class="form__input" required/>
+        </div>
         <div class="form__item">
             <label class="form__label">Total</label>
             <input type="text" th:field="*{total}" class="form__input"/>
@@ -48,5 +42,10 @@
         <button type="submit" class="form__btn">Save</button>
     </form>
 </div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
 </body>
 </html>

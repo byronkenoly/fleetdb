@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | Service</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Update Service Type</h2>
+    <p>Updates service type in the database</p>
+    <form action="#" th:action="@{/saveService}" th:object="${service}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form__item">
+            <label class="form__label">Service Type</label>
+            <input type="text" th:field="*{type}" class="form__input"/>
+        </div>
+
+        <button type="submit" class="form__btn">Update</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

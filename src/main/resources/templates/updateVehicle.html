@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>REREC Fleet | Vehicles</title>
+    <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
     <div class="container">
         <h2>Update Vehicle</h2>
+        <p>Updates vehicle record in the database</p>
         <form action="#" th:action="@{/saveVehicle}" th:object="${vehicle}" method="POST">
             <input type="hidden" th:field="*{numberPlate}"/>
 
-            <!--<input type="text" th:field="*{numberPlate}" class="form-control mb-4 col-4"/>-->
-            <input type="text" th:field="*{make}" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{region}" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{engineCapacity}" class="form-control mb-4 col-4"/>
+            <div class="form__item">
+                <label class="form__label">Make/Model</label>
+                <select th:field="*{make}" class="form__input" required>
+                    <th:block th:each="make : ${listOfMake}">
+                        <option th:text="${make.name}" th:value="${make.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form__item">
+                <label class="form__label">Region</label>
+                <select th:field="*{region}" class="form__input">
+                    <th:block th:each="region : ${listOfRegion}">
+                        <option th:text="${region.name}" th:value="${region.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form__item">
+                <label class="form__label">Engine Capacity</label>
+                <input type="text" th:field="*{engineCapacity}" class="form__input"/>
+            </div>
 
-            <button type="submit" class="btn btn-info col-2">Update Vehicle</button>
+            <button type="submit" class="form__btn">Update Vehicle</button>
         </form>
     </div>
+
+    <script>
+        addHeadContent();
+        newItemCss();
+    </script>
 </body>
 </html>

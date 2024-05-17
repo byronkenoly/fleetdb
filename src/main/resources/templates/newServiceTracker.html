@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | New Service</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add New Service</h2>
+    <p>Inserts new service done into the database.</p>
+    <form action="#" th:action="@{/saveServiceTracker}" th:object="${serviceTracker}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Vehicle Registration No.</label>
+            <select th:field="*{vehicle}" class="form__input" required>
+                <th:block th:each="vehicle : ${listOfVehicle}">
+                    <option th:text="${vehicle.numberPlate}" th:value="${vehicle.numberPlate}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Service Type</label>
+            <select th:field="*{serviceType}" class="form__input" required>
+                <th:block th:each="serviceType : ${listOfServiceType}">
+                    <option th:text="${serviceType.type}" th:value="${serviceType.no}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Service Date</label>
+            <input type="date" th:field="*{lastServiceDate}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Service Mileage</label>
+            <input type="text" th:field="*{lastServiceMileage}" class="form__input" required/>
+        </div>
+
+        <button type="submit" class="form__btn">Save</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

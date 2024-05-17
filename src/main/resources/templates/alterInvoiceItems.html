@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>REREC Fleet | Inv. Items</title>
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link th:href="@{/styles/newItem.css}" rel="stylesheet">
+    <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
 <div class="container">
     <h2>Add Description of Goods/Services</h2>
     <form action="#" th:action="@{/saveInvoiceItems}" th:object="${invoiceItem}" method="POST">
         <div class="form__item">
-            <label class="form__label">Goods Services</label>
+            <label class="form__label">Goods/Services</label>
             <select th:field="*{checklist}" class="form__input" required>
                 <th:block th:each="checklist : ${listOfChecklist}">
                     <option th:text="${checklist.item}" th:value="${checklist.id}"></option>
@@ -31,5 +27,10 @@
         <button type="submit" class="form__btn">Add</button>
     </form>
 </div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
 </body>
 </html>

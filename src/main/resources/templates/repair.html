@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>REREC Fleet | Service</title>
+    <title>REREC Fleet | Summary</title>
+    <link rel="stylesheet" href="/styles/repair.css">
     <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
@@ -11,10 +12,9 @@
 <main>
     <div class="table">
         <div class="table_header">
-            <p>Service Table</p>
+            <p>Service Schedule Table</p>
             <div>
-                <input placeholder="Search Service">
-                <a th:href = "@{/newService}" class="add_new">Add Service</a>
+                <input placeholder="Search Vehicle">
             </div>
         </div>
 
@@ -22,27 +22,25 @@
             <table class="table" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Service ID</th>
+                    <th>Vehicle No Plate</th>
                     <th>Service Type</th>
-                    <th>Actions</th>
+                    <th>Last Service Mileage</th>
+                    <th>Last Service Date</th>
+                    <th>Remaining distance</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="service : ${listOfService}">
-                    <td th:text="${service.no}"></td>
-                    <td th:text="${service.type}"></td>
-                    <td>
-                        <a th:href="@{/updateService/{id}(id=${service.no})}" class="edit">
-                            <span class="material-symbols-outlined">edit</span>
-                        </a>
-                        <a th:href="@{/deleteService/{id}(id=${service.no})}" class="delete">
-                            <span class="material-symbols-outlined">delete</span>
-                        </a>
-                    </td>
+                <tr th:each="row : ${data}">
+                    <td th:text="${row[0]}"></td>
+                    <td th:text="${row[2]}"></td>
+                    <td th:text="${row[3]}"></td>
+                    <td th:text="${#dates.format(row[4], 'dd-MM-yyyy')}"></td>
+                    <td th:text="${row[1]}" th:class="${row[1] lt 0.0} ? 'urgent' : (${row[1]} lt 200.0 ? 'danger-zone' : 'good')"></td>
                 </tr>
                 </tbody>
             </table>
 
+            <!--
             <div th:if = "${totalPages > 1}">
                 <div class="pagination-container">
                     <div class="next-last">
@@ -66,10 +64,10 @@
                     Total Rows: [[${totalItems}]]
                 </div>
             </div>
+            -->
         </div>
 
     </div>
-
 </main>
 
 <script>
@@ -77,5 +75,6 @@
     mainCss();
 </script>
 <script th:src="@{/js/template.js}"></script>
+
 </body>
 </html>

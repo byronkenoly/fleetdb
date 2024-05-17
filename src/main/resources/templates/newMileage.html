@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>REREC Fleet | New Mileage</title>
+    <script th:src="@{/js/headContent.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add New Mileage</h2>
+    <p>Inserts new mileage into the database.</p>
+    <form action="#" th:action="@{/saveMileage}" th:object="${mileage}" method="POST">
+        <div class="form__item">
+            <label class="form__label">Vehicle Registration No.</label>
+            <select th:field="*{vehicle}" class="form__input" required>
+                <th:block th:each="vehicle : ${listOfVehicle}">
+                    <option th:text="${vehicle.numberPlate}" th:value="${vehicle.numberPlate}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Start Date</label>
+            <input type="date" th:field="*{startDate}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Final Date</label>
+            <input type="date" th:field="*{finalDate}" class="form__input" required/>
+        </div>
+        <div class="form__item">
+            <label class="form__label">Distance Covered</label>
+            <input type="text" th:field="*{distanceCovered}" class="form__input" required/>
+        </div>
+
+        <button type="submit" class="form__btn">Save</button>
+    </form>
+</div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
+</body>
+</html>

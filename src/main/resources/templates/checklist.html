@@ -3,13 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>REREC Fleet | Checklist</title>
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
-    <link th:href="@{/styles/main.css}" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" />
-    <script src="http://localhost:35729/livereload.js"></script>
+    <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
 <vertical-navbar></vertical-navbar>
@@ -19,8 +13,15 @@
         <div class="table_header">
             <p>Checklist Table</p>
             <div>
-                <input placeholder="Search Item">
-                <a th:href = "@{/newChecklistItem}" class="add_new">Add Item</a>
+                <form th:action="@{/checklistPage/1}">
+                    <div>
+                        <input type="hidden" name="sortField" th:value="${sortField}"/>
+                        <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+                        <input type="text" name="keyword" placeholder="Search Item"/>
+                        <button type="submit">Search</button>
+                    </div>
+                    <a th:href = "@{/newChecklistItem}" class="add_new">Add Item</a>
+                </form>
             </div>
         </div>
 
@@ -52,24 +53,24 @@
             <div th:if = "${totalPages > 1}">
                 <div class="pagination-container">
                     <div class="next-last">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/vehiclePage/' + ${totalPages}}">Previous</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/checklistPage/' + ${totalPages}}">Previous</a>
                         <span th:unless="${currentPage < totalPages}">Previous</span>
                     </div>
 
                     <div>
                             <span th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
-                                <a th:if="${currentPage != i}" th:href="@{'/vehiclePage/' + ${i}}">[[${i}]]</a>
+                                <a th:if="${currentPage != i}" th:href="@{'/checklistPage/' + ${i}}">[[${i}]]</a>
                                 <span th:unless="${currentPage != i}">[[${i}]]</span>
                             </span>
                     </div>
 
                     <div class="next-last">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/vehiclePage/' + ${currentPage + 1}}">Next</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/checklistPage/' + ${currentPage + 1}}">Next</a>
                         <span th:unless="${currentPage < totalPages}">Next</span>
                     </div>
                 </div>
                 <div class="total-items">
-                    Total Rows: [[${totalItems}]]
+                    Total Items: [[${totalItems}]]
                 </div>
             </div>
         </div>
@@ -78,6 +79,10 @@
 
 </main>
 
+<script>
+    addHeadContent();
+    mainCss();
+</script>
 <script th:src="@{/js/template.js}"></script>
 </body>
 </html>

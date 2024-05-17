@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>REREC Fleet | Checklist</title>
+    <script th:src="@{/js/headContent.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -10,11 +11,18 @@
     <form action="#" th:action="@{/saveChecklistItem}" th:object="${checklist}" method="POST">
         <input type="hidden" th:field="*{id}"/>
 
-        <!--<input type="text" th:field="*{numberPlate}" class="form-control mb-4 col-4"/>-->
-        <input type="text" th:field="*{item}" class="form-control mb-4 col-4"/>
+        <div class="form__item">
+            <label class="form__label">Checklist Item</label>
+            <input type="text" th:field="*{item}" class="form__input"/>
+        </div>
 
-        <button type="submit" class="btn btn-info col-2">Update Checklist</button>
+        <button type="submit" class="form__btn">Update Checklist</button>
     </form>
 </div>
+
+<script>
+    addHeadContent();
+    newItemCss();
+</script>
 </body>
 </html>

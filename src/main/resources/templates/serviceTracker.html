@@ -11,31 +11,35 @@
 <main>
     <div class="table">
         <div class="table_header">
-            <p>Service Table</p>
+            <p>Maintenance Table</p>
             <div>
-                <input placeholder="Search Service">
-                <a th:href = "@{/newService}" class="add_new">Add Service</a>
+                <input placeholder="Search Repair">
+                <a th:href = "@{/newServiceTracker}" class="add_new">Add Repair</a>
             </div>
         </div>
 
         <div class="table_section">
-            <table class="table" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Service ID</th>
+                    <th>Number Plate</th>
                     <th>Service Type</th>
+                    <th>Service Date</th>
+                    <th>Service Mileage</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="service : ${listOfService}">
-                    <td th:text="${service.no}"></td>
-                    <td th:text="${service.type}"></td>
+                <tr th:each="sv : ${listOfServiceTracker}">
+                    <td th:text="${sv.vehicle.numberPlate}"></td>
+                    <td th:text="${sv.serviceType.type}"></td>
+                    <td th:text="${#dates.format(sv.lastServiceDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${sv.lastServiceMileage}"></td>
                     <td>
-                        <a th:href="@{/updateService/{id}(id=${service.no})}" class="edit">
+                        <a th:href="@{/updateTracker/{no}(no=${sv.no})}" class="edit">
                             <span class="material-symbols-outlined">edit</span>
                         </a>
-                        <a th:href="@{/deleteService/{id}(id=${service.no})}" class="delete">
+                        <a th:href="@{/deleteTracker/{no}(no=${sv.no})}" class="delete">
                             <span class="material-symbols-outlined">delete</span>
                         </a>
                     </td>
@@ -46,24 +50,24 @@
             <div th:if = "${totalPages > 1}">
                 <div class="pagination-container">
                     <div class="next-last">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/servicePage/' + ${totalPages}}">Previous</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/vehiclePage/' + ${totalPages}}">Previous</a>
                         <span th:unless="${currentPage < totalPages}">Previous</span>
                     </div>
 
                     <div>
                             <span th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
-                                <a th:if="${currentPage != i}" th:href="@{'/servicePage/' + ${i}}">[[${i}]]</a>
+                                <a th:if="${currentPage != i}" th:href="@{'/vehiclePage/' + ${i}}">[[${i}]]</a>
                                 <span th:unless="${currentPage != i}">[[${i}]]</span>
                             </span>
                     </div>
 
                     <div class="next-last">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/servicePage/' + ${currentPage + 1}}">Next</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/vehiclePage/' + ${currentPage + 1}}">Next</a>
                         <span th:unless="${currentPage < totalPages}">Next</span>
                     </div>
                 </div>
                 <div class="total-items">
-                    Total Rows: [[${totalItems}]]
+                    Total Vehicles: [[${totalItems}]]
                 </div>
             </div>
         </div>

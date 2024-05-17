@@ -28,7 +28,11 @@
             </div>
             <div class="form__item">
                 <label class="form__label">Region</label>
-                <input type="text" th:field="*{region}" class="form__input"/>
+                <select th:field="*{region}" class="form__input">
+                    <th:block th:each="region : ${listOfRegion}">
+                        <option th:text="${region.name}" th:value="${region.id}"></option>
+                    </th:block>
+                </select>
             </div>
             <div class="form__item">
                 <label class="form__label">Engine Capacity</label>
