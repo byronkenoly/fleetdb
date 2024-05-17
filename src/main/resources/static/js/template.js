@@ -10,13 +10,13 @@ class VerticalNavbar extends HTMLElement {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a href = "/workInstructions" class="nav-link">
                             <span class="material-symbols-outlined">description</span>
                             <span class="link-text">Work Instructions</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a href = "/quotations" class="nav-link">
                             <span class="material-symbols-outlined">request_quote</span>
                             <span class="link-text">Quotations</span>
                         </a>
@@ -29,16 +29,43 @@ class VerticalNavbar extends HTMLElement {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a href = "/mileage" class="nav-link">
                             <span class="material-symbols-outlined">speed</span>
                             <span class="link-text">Mileage</span>
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href = "/serviceTracker" class="nav-link">
+                            <span class="material-symbols-outlined">engineering</span>
+                            <span class="link-text">Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href = "/serviceTracker" class="nav-link">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span class="link-text">Schedule</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href = "/checklist" class="nav-link">
+                            <span class="material-symbols-outlined">list</span>
+                            <span class="link-text">Checklist</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href = "/staff" class="nav-link">
+                            <span class="material-symbols-outlined">groups</span>
+                            <span class="link-text">Staff</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         `
     }
 }
 
-customElements.define('vertical-navbar', VerticalNavbar)
+customElements.define('vertical-navbar', VerticalNavbar);
