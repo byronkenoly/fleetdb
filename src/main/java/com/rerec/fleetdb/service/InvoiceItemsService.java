@@ -3,7 +3,6 @@ package com.rerec.fleetdb.service;
 import com.rerec.fleetdb.entities.Checklist;
 import com.rerec.fleetdb.entities.Invoice;
 import com.rerec.fleetdb.entities.InvoiceItems;
-import com.rerec.fleetdb.entities.Vehicle;
 import com.rerec.fleetdb.repository.ChecklistRepository;
 import com.rerec.fleetdb.repository.InvoiceItemsRepository;
 import com.rerec.fleetdb.repository.InvoiceRepository;
@@ -36,7 +35,6 @@ public class InvoiceItemsService {
     }
 
     public void saveInvoiceItem(InvoiceItems invoiceItems){
-
         invoiceItemsRepository.save(invoiceItems);
     }
 

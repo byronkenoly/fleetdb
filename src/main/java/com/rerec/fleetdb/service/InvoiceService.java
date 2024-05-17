@@ -1,16 +1,15 @@
 package com.rerec.fleetdb.service;
 
+import com.rerec.fleetdb.entities.Contractor;
 import com.rerec.fleetdb.entities.Invoice;
-import com.rerec.fleetdb.entities.InvoiceItems;
 import com.rerec.fleetdb.entities.Vehicle;
-import com.rerec.fleetdb.repository.InvoiceItemsRepository;
+import com.rerec.fleetdb.repository.ContractorRepository;
 import com.rerec.fleetdb.repository.InvoiceRepository;
 import com.rerec.fleetdb.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class InvoiceService {
@@ -19,9 +18,12 @@ public class InvoiceService {
 
     private final VehicleRepository vehicleRepository;
 
-    public InvoiceService(InvoiceRepository invoiceRepository, VehicleRepository vehicleRepository){
+    private final ContractorRepository contractorRepository;
+
+    public InvoiceService(InvoiceRepository invoiceRepository, VehicleRepository vehicleRepository, ContractorRepository contractorRepository){
         this.invoiceRepository = invoiceRepository;
         this.vehicleRepository = vehicleRepository;
+        this.contractorRepository = contractorRepository;
     }
 
     public List<Invoice> getAllInvoice(){
@@ -32,25 +34,30 @@ public class InvoiceService {
         return vehicleRepository.findAll();
     }
 
-    /*
-    public Map<Long, List<InvoiceItems>> getAllItemsByID(List<Invoice> invoices) {
-        Map<Long, List<InvoiceItems>> invoiceItemsMap = new HashMap<>();
+    public List<Contractor> getAllContractor() {
+        return contractorRepository.findAll();
+    }
 
-        for(Invoice invoice : invoices){
-            List<InvoiceItems> invoiceItems = invoiceRepository.findItemsByNo(invoice.getNo());
-            invoiceItemsMap.put(invoice.getNo(), invoiceItems);
+    public Invoice getInvoiceByID(Long id){
+        Optional<Invoice> optional = invoiceRepository.findById(id);
+
+        Invoice invoice = null;
+
+        if(optional.isPresent()){
+            invoice = optional.get();
+        } else {
+            throw new RuntimeException(id + " not found");
         }
 
-        return invoiceItemsMap;
-    }*/
-
-    /*
-    public List<InvoiceItems> getItemsByInvoice(Invoice invoice){
-        return invoiceRepository.findItemsByInvoice(invoice);
-    }*/
+        return invoice;
+    }
 
     public void saveInvoice(Invoice invoice){
 
         invoiceRepository.save(invoice);
+    }
+
+    public void deleteInvoice(Long no){
+        this.invoiceRepository.deleteById(no);
     }
 }
