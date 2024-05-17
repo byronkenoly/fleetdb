@@ -3,8 +3,10 @@ package com.rerec.fleetdb.entities;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Quotation {
@@ -18,10 +20,15 @@ public class Quotation {
 
     private String documentNo;
 
+    @ManyToOne
+    @JoinColumn(name="contractor_id")
+    private Contractor contractor;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    private String serviceDescription;
+    @OneToMany(mappedBy = "quotation")
+    private List<QuotationItems> quotationItems = new ArrayList<>();
 
     private Float total;
 
@@ -49,6 +56,14 @@ public class Quotation {
         this.documentNo = documentNo;
     }
 
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -57,12 +72,12 @@ public class Quotation {
         this.date = date;
     }
 
-    public String getServiceDescription() {
-        return serviceDescription;
+    public List<QuotationItems> getQuotationItems() {
+        return quotationItems;
     }
 
-    public void setServiceDescription(String serviceDescription) {
-        this.serviceDescription = serviceDescription;
+    public void setQuotationItems(List<QuotationItems> quotationItems) {
+        this.quotationItems = quotationItems;
     }
 
     public Float getTotal() {

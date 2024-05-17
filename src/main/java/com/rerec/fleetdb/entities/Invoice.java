@@ -17,6 +17,10 @@ public class Invoice {
 
     private String invoiceNo;
 
+    @ManyToOne
+    @JoinColumn(name="contractor_id")
+    private Contractor contractor;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
@@ -49,6 +53,14 @@ public class Invoice {
 
     public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 
     public Date getDate() {

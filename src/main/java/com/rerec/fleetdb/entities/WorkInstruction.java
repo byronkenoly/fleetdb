@@ -3,8 +3,10 @@ package com.rerec.fleetdb.entities;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class WorkInstruction {
@@ -22,6 +24,9 @@ public class WorkInstruction {
     @ManyToOne
     @JoinColumn(name="contractor_id")
     private Contractor contractor;
+
+    @OneToMany(mappedBy = "workInstruction", cascade = CascadeType.ALL)
+    private List<WorkInstructionItems> workInstructionItems = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="staff_id")
@@ -57,6 +62,14 @@ public class WorkInstruction {
 
     public void setContractor(Contractor contractor) {
         this.contractor = contractor;
+    }
+
+    public List<WorkInstructionItems> getWorkInstructionItems() {
+        return workInstructionItems;
+    }
+
+    public void setWorkInstructionItems(List<WorkInstructionItems> workInstructionItems) {
+        this.workInstructionItems = workInstructionItems;
     }
 
     public Staff getStaff() {

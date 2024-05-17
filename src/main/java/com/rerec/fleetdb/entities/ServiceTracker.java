@@ -13,6 +13,10 @@ public class ServiceTracker {
     private Long no;
 
     @ManyToOne
+    @JoinColumn(name="vehicle_no_plate")
+    private Vehicle vehicle;
+
+    @ManyToOne
     @JoinColumn(name="service_type_id")
     private ServiceType serviceType;
 
@@ -27,6 +31,14 @@ public class ServiceTracker {
 
     public void setNo(Long no) {
         this.no = no;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public ServiceType getServiceType() {

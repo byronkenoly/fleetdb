@@ -9,12 +9,16 @@ import jakarta.persistence.ManyToOne;
 public class Vehicle {
     @Id
     private String numberPlate;
-    private String region;
-    private int engineCapacity;
 
     @ManyToOne
     @JoinColumn(name="make_id")
     private Make make;
+
+    @ManyToOne
+    @JoinColumn(name="region_id")
+    private Region region;
+
+    private int engineCapacity;
 
     public String getNumberPlate(){
         return numberPlate;
@@ -32,11 +36,11 @@ public class Vehicle {
         this.make = make;
     }
 
-    public String getRegion() {
+    public Region getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(Region region) {
         this.region = region;
     }
 
